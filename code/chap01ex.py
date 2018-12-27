@@ -14,13 +14,14 @@ import nsfg
 import thinkstats2
 
 
-def main(script):
-    """Tests the functions in this module.
+def main():
+    df = read("2002FemResp.dct", "2002FemResp.dat.gz")
+    print(df.pregnum.value_counts().sort_index())
 
-    script: string script name
-    """
-    print('%s: All tests passed.' % script)
-
-
+def read(dct_file_path, data_file_path):
+    dct = thinkstats2.ReadStataDct(dct_file_path)
+    df = dct.ReadFixedWidth(data_file_path, compression="gzip")
+    return df
+                            
 if __name__ == '__main__':
-    main(*sys.argv)
+    main()

@@ -21,8 +21,11 @@ def Mode(hist):
 
     returns: value from Hist
     """
-    return 0
-
+    max_freq = max(hist.Freqs(hist.Values()))
+    
+    for value in hist.Values():
+        if hist.Freq(value) == max_freq:
+            return value
 
 def AllModes(hist):
     """Returns value-freq pairs in decreasing order of frequency.
@@ -31,7 +34,10 @@ def AllModes(hist):
 
     returns: iterator of value-freq pairs
     """
-    return []
+
+    freq_value_dic = {freq:value for value, freq in hist.Items()}
+    
+    return [(freq_value_dic[freq], freq) for freq in sorted(freq_value_dic, reverse=True)]
 
 
 def main(script):
